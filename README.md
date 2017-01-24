@@ -1,4 +1,6 @@
+<!--
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/the-catalin/cat-animation)
+-->
 
 # cat-animation
 
