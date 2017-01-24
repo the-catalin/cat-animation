@@ -12,7 +12,7 @@ includes:
 
 ## Demo
 
-Currently, there are no dedicated demos for these animations, but some of the effects can be tested on the [Live Demo](http://webcomponents.online/cat-animation/) of [cat-image](https://www.webcomponents.org/element/the-catalin/cat-image)
+Currently, there are no dedicated demos for these animations, but some of the effects can be tested on the [Live Demo](http://webcomponents.online/cat-image/) of [cat-image](https://www.webcomponents.org/element/the-catalin/cat-image)
 
 ## Install
 
