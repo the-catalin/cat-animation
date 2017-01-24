@@ -1,0 +1,99 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-animation-behavior.html">
+
+<script>
+
+Polymer({
+
+	is: 'cat-slide-animation',
+
+	behaviors: [Polymer.CatAnimationBehavior],
+
+	properties: {
+		_defaults : {
+			value: {
+				slide: 'in',
+				direction: 'left',
+				function: 'ease',
+				duration: 1,
+				delay: 0,
+				offset: 100
+			}
+		},
+		_restrictions: {
+			value: {
+				slide: ['in', 'out'],
+				direction: ['left', 'right', 'top', 'bottom'],
+				function: ['ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear'],
+				duration: 'number',
+				delay: 'number',
+				offset: 'number'
+			}
+		}
+	},
+	
+	_customInit: function() {
+		
+	},
+
+	startStyles: function() {
+
+		if (!this._config.reverse) {
+			this._config.node.style.transition = 'none';
+		}
+
+		var transform;
+
+		if (this._config.slide === 'in') {
+
+			if (this._config.direction === 'left') {
+				transform = 'translateX(-' + this._config.offset + '%)';
+			} else if (this._config.direction === 'right') {
+				transform = 'translateX(' + this._config.offset + '%)';
+			} else if (this._config.direction === 'top') {
+				transform = 'translateY(-' + this._config.offset + '%)';
+			} else if (this._config.direction === 'bottom') {
+				transform = 'translateY(' + this._config.offset + '%)';
+			}
+
+		} else {
+			transform = 'translateX(0) translateY(0)';
+		}
+
+		this._config.node.style.transform = transform;
+
+	},
+
+	endStyles: function() {
+
+		var transform;
+
+		this._config.node.style.transitionDuration = this._config.duration + 's';
+		this._config.node.style.transitionDelay = this._config.delay + 's';
+		this._config.node.style.transitionTimingFunction = this._config.function;
+		this._config.node.style.transitionProperty = 'all';
+
+		if (this._config.slide === 'out') {
+
+			if (this._config.direction === 'left') {
+				transform = 'translateX(-' + this._config.offset + '%)';
+			} else if (this._config.direction === 'right') {
+				transform = 'translateX(' + this._config.offset + '%)';
+			} else if (this._config.direction === 'top') {
+				transform = 'translateY(-' + this._config.offset + '%)';
+			} else if (this._config.direction === 'bottom') {
+				transform = 'translateY(' + this._config.offset + '%)';
+			}
+
+		} else {
+			transform = 'translateX(0) translateY(0)';
+		}
+
+		this._config.node.style.transform = transform;
+
+	}
+
+});
+
+</script>

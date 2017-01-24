@@ -1,0 +1,87 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-animation-behavior.html">
+
+<script>
+
+Polymer({
+
+	is: 'cat-zoom-animation',
+
+	behaviors: [Polymer.CatAnimationBehavior],
+
+	properties: {
+		_defaults : {
+			value: {
+				zoom: 'out',
+				origin: 'center',
+				scale: 10,
+				function: 'ease-in-out',
+				duration: 6,
+				delay: 0
+			}
+		},
+		_restrictions: {
+			value: {
+				zoom: ['in', 'out'],
+				origin: ['center', 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'random'],
+				scale: 'number',
+				function: ['ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear'],
+				duration: 'number',
+				delay: 'number'
+			}
+		},
+		_originToPercentage: {
+			value: {
+				'center': '50% 50%',
+				'top-left': '20% 20%',
+				'top-right': '80% 20%',
+				'bottom-left': '20% 80%',
+				'bottom-right': '80% 80%'
+			}
+		}
+	},
+
+	_customInit: function() {
+		
+		if (this._config.origin === 'random') {
+			this._config.origin = this._restrictions.origin[Math.floor(Math.random() * 5)];
+		}
+
+	},
+
+	startStyles: function() {
+
+		this._config.node.style.transformOrigin = this._originToPercentage[this._config.origin];
+
+		var scale = (100 + this._config.scale) / 100;			
+		
+		if (this._config.zoom === 'out') {
+			this._config.node.style.transform = 'scale(' + scale + ', ' + scale + ')';
+		} else {
+			this._config.node.style.transform = 'scale(1, 1)';				
+		}
+
+	},
+
+	endStyles: function() {
+
+		var scale = (100 + this._config.scale) / 100;
+
+		this._config.node.style.transitionDuration = this._config.duration + 's';
+		this._config.node.style.transitionDelay = this._config.delay + 's';
+		this._config.node.style.transitionTimingFunction = this._config.function;
+		this._config.node.style.transitionProperty = 'all';
+
+		if (this._config.zoom === 'out') {
+			this._config.node.style.transform = 'scale(1, 1)';
+		} else {
+			this._config.node.style.transform = 'scale(' + scale + ', ' + scale + ')';
+		}
+
+	}	
+
+});
+
+
+</script>

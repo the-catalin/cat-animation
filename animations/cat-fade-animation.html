@@ -1,0 +1,59 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-animation-behavior.html">
+
+<script>
+
+	Polymer({
+
+		is: 'cat-fade-animation',
+
+		behaviors: [Polymer.CatAnimationBehavior],
+
+		properties: {
+			_defaults : {
+				value: {
+					fade: 'in',
+					duration: 1,
+					delay: 0
+				}
+			},
+			_restrictions: {
+				value: {
+					fade: ['in', 'out'],
+					duration: 'number',
+					delay: 'number'
+				}
+			}
+		},		
+
+		startStyles: function() {
+
+			if (!this._config.reverse) {
+				this._config.node.style.transition = 'none';
+			}
+
+			if (this._config.fade === 'in') {
+				this._config.node.style.opacity = 0;
+			} else {
+				this._config.node.style.opacity = 1;
+			}
+
+		},
+
+		endStyles: function() {
+
+			this._config.node.style.transitionDuration = this._config.duration + 's';
+			this._config.node.style.transitionDelay = this._config.delay + 's';
+			this._config.node.style.transitionProperty = 'all';
+
+			if (this._config.fade === 'in') {
+				this._config.node.style.opacity = 1;
+			} else {
+				this._config.node.style.opacity = 0;
+			}
+		}
+
+	});
+
+</script>

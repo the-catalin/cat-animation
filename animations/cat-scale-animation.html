@@ -1,0 +1,100 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="../cat-animation-behavior.html">
+
+<script>
+
+Polymer({
+
+	is: 'cat-scale-animation',
+
+	behaviors: [Polymer.CatAnimationBehavior],
+
+	properties: {
+		_defaults : {
+			value: {
+				scale: 'up',
+				direction: 'center',
+				function: 'ease',
+				duration: 1,
+				delay: 0
+			}
+		},
+		_restrictions: {
+			value: {
+				scale: ['up', 'down'],
+				direction: ['center', 'left', 'right', 'top', 'bottom', 'horizontal', 'vertical'],
+				function: ['ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear'],
+				duration: 'number',
+				delay: 'number'
+			}
+		},
+		_directionToScale: {
+			value: {
+				'center': 'scale(0)',
+				'horizontal': 'scale(0, 1)',
+				'vertical': 'scale(1, 0)',
+				'top': 'scale(1, 0)',
+				'bottom': 'scale(1, 0)',
+				'left': 'scale(0, 1)',
+				'right': 'scale(0, 1)'
+			}
+		},
+		_directionToOrigin: {
+			value: {
+				'center': '50% 50%',
+				'horizontal': '50% 50%',
+				'vertical': '50% 50%',
+				'top': '100% 0',
+				'bottom': '100% 100%',
+				'left': '0 100%',
+				'right': '100% 100%'
+			}
+		}
+	},
+
+
+	_customInit: function() {
+
+	},
+
+	startStyles: function() {
+
+		if (!this._config.reverse) {
+			this._config.node.style.transition = 'none';
+		}
+		
+		if (this._config.scale === 'up') {
+
+			this._config.node.style.transform = this._directionToScale[this._config.direction];
+
+		} else {
+			this._config.node.style.transform = 'scale(1, 1)';
+		}
+
+		this._config.node.style.transformOrigin = this._directionToOrigin[this._config.direction];
+
+	},
+
+	endStyles: function() {
+
+		this._config.node.style.transitionDuration = this._config.duration + 's';
+		this._config.node.style.transitionDelay = this._config.delay + 's';
+		this._config.node.style.transitionTimingFunction = this._config.function;
+		this._config.node.style.transitionProperty = 'all';
+
+		if (this._config.scale === 'up') {
+
+			this._config.node.style.transform = 'scale(1, 1)';
+
+		} else {
+
+			this._config.node.style.transform = this._directionToScale[this._config.direction];
+
+		}
+
+	}
+
+});
+
+</script>

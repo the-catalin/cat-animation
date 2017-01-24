@@ -1,0 +1,82 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<script>
+
+Polymer.CatAnimationBehavior = {
+
+	properties: {
+		_config: {
+			value: function() {
+			    return {};
+			}
+		}
+	},
+	
+	_extendWithDefaults: function() {
+		
+		for (var prop in this._defaults) {
+			if (this._defaults.hasOwnProperty(prop) && typeof this._config[prop] === 'undefined') {
+				this._config[prop] = this._defaults[prop];
+			}
+		}
+
+	},
+
+	_errorHandling: function() {
+
+		for (var prop in this._config) {
+			if (this._config.hasOwnProperty(prop) && this._restrictions[prop]) {
+				//checking if this._restrictions[prop] is an array
+				if (typeof this._restrictions[prop] === 'object') {
+					if (this._restrictions[prop].indexOf(this._config[prop]) === -1) {
+						delete this._config[prop];
+					}
+				} else if (this._restrictions[prop] === 'number') {
+					if (typeof this._config[prop] !== 'number') {
+						delete this._config[prop];
+					}
+				}
+			}
+		}			
+
+	},
+
+	initConfig: function(config) {
+		this._config = config;
+
+		//chose 'undefined' check as it can be set to false by the user, in which case we'll leave it as it is
+		if (typeof this._config.reverse === 'undefined') {
+			this._config.reverse = true;
+		}
+		if (typeof this._config.reverseDuration === 'undefined') {
+			this._config.reverseDuration = 1;
+		}
+		
+		this._errorHandling();
+
+		this._extendWithDefaults();
+
+		if (typeof this._customInit === 'function') {
+			this._customInit();
+		}
+
+	},
+
+	reverseStyles: function() {
+
+		if (this._config.reverse) {
+			this._config.node.style.transitionDuration = this._config.reverseDuration + 's';
+			this.startStyles();
+		}
+	},
+
+	getConfigProperty: function(prop) {
+		if (this._config[prop]) {
+			return this._config[prop];
+		}
+		return;
+	}
+
+};
+
+</script>
