@@ -12,7 +12,7 @@ includes:
 
 ## Demo
 
-Currently, there are no dedicated demos for these animation, but some of the effects can be tested on the [Live Demo](http://webcomponents.online/cat-animation/) of [cat-image](https://www.webcomponents.org/element/the-catalin/cat-image)
+Currently, there are no dedicated demos for these animations, but some of the effects can be tested on the [Live Demo](http://webcomponents.online/cat-animation/) of [cat-image](https://www.webcomponents.org/element/the-catalin/cat-image)
 
 ## Install
 
@@ -72,9 +72,9 @@ Or [download as ZIP](https://github.com/the-catalin/cat-animation/archive/master
 	});
 	```
 
-	'animationSet' is a string with any name. If you call `addAnimation` on the same string name multiple times, when you will later trigger the `play` function with that name, all the animations added to that name will be played.
+	'animationSet' is a string with any name. If you call `addAnimation` on the same string name multiple times, when you will later trigger the `play` function on that name, all the animations added to that name will be played.
 	
-	node can be `this` (the Polymer element itself), or any other element inside it.
+	'node' can be `this` (the Polymer element itself), or any other element inside it.
 
 5. Play the animation
 
@@ -85,7 +85,7 @@ Or [download as ZIP](https://github.com/the-catalin/cat-animation/archive/master
 	optionally, you can reverse the animation later:
 
 	```js
-	this.play('animationSet');
+	this.reverse('animationSet');
 	```
 
 
