@@ -1,6 +1,6 @@
 {
   "name": "cat-animation",
-  "version": "0.8.0",
+  "version": "0.8.4",
   "description": "Add animation to your Polymer elements",
   "authors": [
     "Catalin Ungureanu <catalinungureanu@gmail.com>"
@@ -8,8 +8,7 @@
   "keywords": [
     "web-components",
     "polymer",
-    "text",
-    "effect"
+    "animation"
   ],
   "main": "cat-animation-runner-behavior.html",
   "license": "MIT",
