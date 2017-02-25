@@ -54,6 +54,9 @@ CatBehaviors.CatAnimationBehavior = {
 		if (typeof this._config.reverseDuration === 'undefined') {
 			this._config.reverseDuration = 1;
 		}
+		if (typeof this._config.reverseDelay === 'undefined') {
+			this._config.reverseDelay = 0;
+		}
 		
 		this._errorHandling();
 
@@ -69,6 +72,7 @@ CatBehaviors.CatAnimationBehavior = {
 
 		if (this._config.reverse) {
 			this._config.node.style.transitionDuration = this._config.reverseDuration + 's';
+			this._config.node.style.transitionDelay = this._config.reverseDelay + 's';
 			this.startStyles();
 		}
 	},
