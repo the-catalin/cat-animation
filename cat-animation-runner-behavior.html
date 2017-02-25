@@ -2,63 +2,69 @@
 
 <script>
 
-	Polymer.CatAnimationRunnerBehavior = {
 
-		properties: {
-			_animations: {
-				value: function() {
-				    return {};
-				}
-			},
-		},
+window.CatBehaviors = window.CatBehaviors || {};
+/** @polymerBehavior */
+CatBehaviors.CatAnimationRunnerBehavior = {
 
-		addAnimation: function(name, config) {
-			if (!this._animations[name]) {
-				this._animations[name] = [];
-			}
-			
-			var catAnimation = document.createElement(config.name);
-			
-			if (catAnimation.initConfig) {
-				catAnimation.initConfig(config);
-				config.catAnimation = catAnimation;
-			} else {
-				console.warn('There is no animation with this name: "' + config.name + '"');
-			}
-			
-			this._animations[name].push(config);
-
-			return catAnimation;
-		},
-
-		_applyStyles: function(name, functionName) {
-			var nameArray = this._animations[name];
-			if (nameArray) {
-				for (var i = 0, len = nameArray.length; i < len; i++) {
-					if (nameArray[i].catAnimation && typeof nameArray[i].catAnimation[functionName] === 'function') {
-						nameArray[i].catAnimation[functionName]();
-					}
-				}
+	properties: {
+		_animations: {
+			value: function() {
+			    return {};
 			}
 		},
+	},
 
-		initAnimation: function(name) {
-			this._applyStyles(name, 'startStyles');
-		},
-
-		play: function(name) {
-			this._applyStyles(name, 'startStyles');
-			var self = this;
-			setTimeout(function() {
-				self._applyStyles(name, 'endStyles');
-			}, 30);
-		},
-
-		reverse: function(name) {
-			this._applyStyles(name, 'reverseStyles');
+	addAnimation: function(name, config) {
+		if (!this._animations[name]) {
+			this._animations[name] = [];
 		}
 		
+		var catAnimation = document.createElement(config.name);
+		
+		if (catAnimation.initConfig) {
+			catAnimation.initConfig(config);
+			config.catAnimation = catAnimation;
+		} else {
+			console.warn('There is no animation with this name: "' + config.name + '"');
+		}
+		
+		this._animations[name].push(config);
 
-	};
+		return catAnimation;
+	},
+
+	_applyStyles: function(name, functionName) {
+		var nameArray = this._animations[name];
+		if (nameArray) {
+			for (var i = 0, len = nameArray.length; i < len; i++) {
+				if (nameArray[i].catAnimation && typeof nameArray[i].catAnimation[functionName] === 'function') {
+					nameArray[i].catAnimation[functionName]();
+				}
+			}
+		}
+	},
+
+	initAnimation: function(name) {
+		this._applyStyles(name, 'startStyles');
+	},
+
+	play: function(name) {
+		this._applyStyles(name, 'startStyles');
+		var self = this;
+		setTimeout(function() {
+			self._applyStyles(name, 'endStyles');
+		}, 30);
+	},
+
+	reverse: function(name) {
+		var self = this;
+		setTimeout(function() {
+			self._applyStyles(name, 'reverseStyles');
+		}, 60);
+	}
+	
+
+};
 
 </script>
