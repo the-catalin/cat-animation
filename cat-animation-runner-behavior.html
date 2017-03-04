@@ -29,9 +29,16 @@ CatBehaviors.CatAnimationRunnerBehavior = {
 			console.warn('There is no animation with this name: "' + config.name + '"');
 		}
 		
+		config.self = this;
 		this._animations[name].push(config);
 
 		return catAnimation;
+	},
+
+	clearAnimation: function(name) {
+		this._animations[name] = [];
+		this._animations[name].length = 0;
+		
 	},
 
 	_applyStyles: function(name, functionName) {
@@ -54,6 +61,7 @@ CatBehaviors.CatAnimationRunnerBehavior = {
 		var self = this;
 		setTimeout(function() {
 			self._applyStyles(name, 'endStyles');
+			self._applyStyles(name, 'doneFunctions');
 		}, 30);
 	},
 

@@ -77,6 +77,15 @@ CatBehaviors.CatAnimationBehavior = {
 		}
 	},
 
+	doneFunctions: function() {		
+		if (typeof this._config.done === 'function') {
+			var self = this;
+			setTimeout(function() {
+				self._config.done.call(self._config.self);
+			}, (this._config.duration + this._config.delay) * 1000);
+		}
+	},
+
 	getConfigProperty: function(prop) {
 		if (this._config[prop]) {
 			return this._config[prop];

@@ -24,7 +24,7 @@ Polymer({
 		_restrictions: {
 			value: {
 				slide: ['in', 'out'],
-				direction: ['left', 'right', 'top', 'bottom'],
+				direction: ['left', 'right', 'top', 'bottom', 'random'],
 				function: ['ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear'],
 				duration: 'number',
 				delay: 'number',
@@ -34,7 +34,9 @@ Polymer({
 	},
 	
 	_customInit: function() {
-		
+		if (this._config.direction === 'random') {
+			this._config.direction = this._restrictions.direction[Math.floor(Math.random() * 4)];
+		}
 	},
 
 	startStyles: function() {
