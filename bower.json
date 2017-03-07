@@ -1,6 +1,6 @@
 {
   "name": "cat-animation",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Add animation to your Polymer elements",
   "authors": [
     "Catalin Ungureanu <catalinungureanu@gmail.com>"

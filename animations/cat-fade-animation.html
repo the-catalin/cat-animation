@@ -39,6 +39,12 @@
 				this._config.node.style.opacity = 1;
 			}
 
+			// this is to reset the tranlateX position if for the same node, it was
+			// previously applied a slide animation
+			// this shouldn't happen here, instead, the 'reverse' flag of that particular
+			// animation should handle it
+			this._config.node.style.transform = 'none';
+
 		},
 
 		endStyles: function() {
